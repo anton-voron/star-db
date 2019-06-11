@@ -31,6 +31,7 @@ export default class SwapiService { // классы серверы это хор
 
   async getPlanet(id) { //делаем ассинхронной, иначе await не будет работать
     const planet = await this.getResource(`/planets/${id}/`);
+    console.log(planet);
     return this._transformPlanet(planet);
   }
 
@@ -46,7 +47,7 @@ export default class SwapiService { // классы серверы это хор
 
   _extractId(item) {
     const idRegExp = /\/([0-9]*)\/$/;
-    const id = item.url.match(idRegExp)[1];
+    return item.url.match(idRegExp)[1];
   }
 
   _transformPlanet (planet) {
