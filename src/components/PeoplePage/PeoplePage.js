@@ -13,6 +13,7 @@ export default class PeoplePage extends Component {
 	}
 
 	componentDidCatch(error, info) {
+		debugger;
 	   this.setState({
 	     hasError: true
 	   });

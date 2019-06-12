@@ -13,7 +13,6 @@ class App extends Component {
 
   state = {
     showRandomPlanet: true,
-    selectedPerson: 4,
     hasError: false
   };
 
