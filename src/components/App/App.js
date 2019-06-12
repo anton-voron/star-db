@@ -4,12 +4,17 @@ import Header from '../Header/Header.js';
 import RandomPlanet from '../RandomPlanet/RandomPlanet.js';
 import ErrorButton from '../ErrorButton/ErrorButton.js';
 import ErrorIndicator from '../ErrorIndicator/ErrorIndicator.js';
-import PeoplePage from '../PeoplePage/PeoplePage.js'
+import PeoplePage from '../PeoplePage/PeoplePage.js';
+import SwapiService from '../../services/SwapiService .js'
+import ItemList from '../ItemList/ItemList.js';
+import PersonDetails from '../PersonDetails/PersonDetails.js';
 
 
 import './App.css';
 
 class App extends Component {
+
+  swapiService = new SwapiService();
 
   state = {
     showRandomPlanet: true,
@@ -56,6 +61,18 @@ class App extends Component {
         </div>
 
         <PeoplePage />
+
+        <div className="row mb2">
+	        <div className="col-md-6">
+	          <ItemList 
+	          onItemSelected={this.onPersonSelected} 
+	          getData = {this.swapiService.getAllStarships}
+	          />
+	        </div>
+	        <div className="col-md-6">
+	          <PersonDetails personId={this.state.selectedPerson} />
+	        </div>
+	      </div>
 
       </div>
     );
