@@ -9,10 +9,11 @@ import PeoplePage from '../PeoplePage/PeoplePage.js'
 
 import './App.css';
 
-export default class App extends Component {
+class App extends Component {
 
   state = {
     showRandomPlanet: true,
+    selectedPerson: 4,
     hasError: false
   };
 
@@ -24,20 +25,23 @@ export default class App extends Component {
     });
   };
 
-  componentDidCatch() {
-    this.setState({ hasError: true });
+
+  onPersonSelected  = (id) => {
+    this.setState({
+      selectedPerson: id
+    })
   }
 
+  componentDidCatch () {
+    console.log('Component did catch');
+    this.setState({hasError: true});
+  }
   render() {
 
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
-
-    const planet = this.state.showRandomPlanet ?
-      <RandomPlanet/> :
-      null;
-
+    const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
     return (
       <div className="stardb-app">
         <Header />
@@ -56,5 +60,7 @@ export default class App extends Component {
 
       </div>
     );
-  }
-}
+  } 
+};
+
+export default App;
