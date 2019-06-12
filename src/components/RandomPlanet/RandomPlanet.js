@@ -22,10 +22,11 @@ export default class RandomPlanet extends Component {
 
 componentDidMount () {
   this.updatePlanet();
-  this.interval = setInterval(this.updatePlanet, 10000); // создаём таймер id, по которому очистим ссылку на метод, когда он станет ненужным, ибо без этого он не удалитьься и будет постоянно делать запрос на сервер
+  this.interval = setInterval(this.updatePlanet, 5000); // создаём таймер id, по которому очистим ссылку на метод, когда он станет ненужным, ибо без этого он не удалитьься и будет постоянно делать запрос на сервер
 }
 
 componentWillUnmount() {
+  clearInterval(this.interval); //Нужно удалить данные, с которыми работал RandomPlanet , когда он закрывается, ибо эти элементы не удаляться и на фоне будет происходить запрос к серверу  дальше
 }
 
 onError = (err) => {
@@ -36,6 +37,7 @@ onError = (err) => {
 }
 
 onPlanetLoaded = (planet) => {
+  console.log('update');
   this.setState({
     planet,
     loading: false
