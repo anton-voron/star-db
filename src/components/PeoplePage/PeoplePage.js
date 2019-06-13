@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ItemList from '../ItemList/ItemList.js';
-import PersonDetails from '../PersonDetails/PersonDetails.js';
+import ItemDetails from '../ItemDetails/ItemDetails.js';
 import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 import ErrorIndicator from '../ErrorIndicator/ErrorIndicator.js';
 import SwapiService from '../../services/SwapiService .js';
@@ -12,13 +12,13 @@ export default class PeoplePage extends Component {
 
 	swapiService = new SwapiService();
 	state = {
-		selectedPerson: 3
+		selectedItem: 3
 	}
 
 	
 
-	 onPersonSelected = (selectedPerson) => {
-    	this.setState({ selectedPerson });
+	 onItemSelected = (selectedItem) => {
+    	this.setState({ selectedItem });
   	};
 
 	render () {
@@ -28,7 +28,7 @@ export default class PeoplePage extends Component {
 
 	    const itemList = (
 	    	<ItemList 
-	          onItemSelected={this.onPersonSelected} 
+	          onItemSelected={this.onItemSelected} 
 	          getData = {this.swapiService.getAllPeople}
 	          /* Передаём саму функцию, а не вызываем ёё , поскольку тогда следующий компонент сам решает, когда её вызвать. 
 	          И так как мы передаём контекст this в SwapiService нужно привязать через bind / или стрелочную функцию () => {} */
@@ -41,13 +41,13 @@ export default class PeoplePage extends Component {
 	          </ItemList> 
 	    	);
 
-	    const persoDetails = (
+	    const itemDetails = (
 	    	<ErrorBoundry>
-				<PersonDetails personId={this.state.selectedPerson} />
+				<ItemDetails itemId={this.state.selectedItem} />
 	    	</ErrorBoundry>
 	    	);
 		return (
-	      		<Row left = {itemList} right={persoDetails} />
+	      		<Row left = {itemList} right={itemDetails} />
 	    );
 	}
 };
