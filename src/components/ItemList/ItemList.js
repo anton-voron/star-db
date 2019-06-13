@@ -23,12 +23,16 @@ export default class ItemList extends Component {
   }
 
   renderItems(arr) {
-    return arr.map(({id, name}) => {
+    return arr.map((item) => {
+      const {id} = item;
+      /*const label = this.props.renderItem(item); // Выводим те дагнные, которе нам нужны ( указанны на верхнем уровне DOM)*/
+      const label = this.props.children(item); // Специальное свйоство, которое считывает элементы внутри HTML разметки
+
       return (
         <li className="list-group-item"
             key={id}
             onClick = {() => this.props.onItemSelected(id)}>
-          {name}
+          {label}
         </li>
         );
     });

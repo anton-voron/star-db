@@ -2,24 +2,20 @@ import React, { Component } from 'react';
 
 import ItemList from '../ItemList/ItemList.js';
 import PersonDetails from '../PersonDetails/PersonDetails.js';
+import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 import ErrorIndicator from '../ErrorIndicator/ErrorIndicator.js';
 import SwapiService from '../../services/SwapiService .js';
+import Row from '../Row/Row.js';
 import './PeoplePage.css';
 
 export default class PeoplePage extends Component {
 
 	swapiService = new SwapiService();
 	state = {
-		selectedPerson: 3,
-		hasError: false
+		selectedPerson: 3
 	}
 
-	componentDidCatch(error, info) {
-		debugger;
-	   this.setState({
-	     hasError: true
-	   });
-	 }
+	
 
 	 onPersonSelected = (selectedPerson) => {
     	this.setState({ selectedPerson });
@@ -29,17 +25,31 @@ export default class PeoplePage extends Component {
 		if (this.state.hasError) {
 	      return <ErrorIndicator />;
 	    }
-		return (
-	      <div className="row mb2">
-	        <div className="col-md-6">
-	          <ItemList 
+
+	    const itemList = (
+	    	<ItemList 
 	          onItemSelected={this.onPersonSelected} 
-	          getData = {this.swapiService.getAllPeople}/>
-	        </div>
-	        <div className="col-md-6">
-	          <PersonDetails personId={this.state.selectedPerson} />
-	        </div>
-	      </div>
+	          getData = {this.swapiService.getAllPeople}
+	          /* Передаём саму функцию, а не вызываем ёё , поскольку тогда следующий компонент сам решает, когда её вызвать. 
+	          И так как мы передаём контекст this в SwapiService нужно привязать через bind / или стрелочную функцию () => {} */
+	          /*renderItem = {(item) => `${item.name} (${item.gender}, ${item.birthYear})`}*/
+	          /*renderItem = {({name, gender, birthYear}) => ( // Создаём функцию, которая будет выводить необходимые для нас свойства из объекта для конкретного случая !!!!!!! Используй render функцию в TABACOS!!!!!!
+	          	`${name}  (${gender}, ${birthYear})`)}*/>
+	          	{(item) => ( 
+	          		`${item.name}  (${item.birthYear})`
+	          	)}
+	          </ItemList> 
+	    	);
+
+	    const persoDetails = (
+	    	<ErrorBoundry>
+				<PersonDetails personId={this.state.selectedPerson} />
+	    	</ErrorBoundry>
+	    	);
+		return (
+	      		<Row left = {itemList} right={persoDetails} />
 	    );
 	}
-}
+};
+
+

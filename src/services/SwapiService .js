@@ -19,7 +19,7 @@ export default class SwapiService { // классы серверы это хор
     return res.results.map(this._transformPerson);
   };
 
-  getPerson = async (id) => {
+  getPerson = async (id) => { // функция стрелка намертво запоминает свой this
     const person = await this.getResource(`/people/${id}/`);
     return this._transformPerson(person);
   }
