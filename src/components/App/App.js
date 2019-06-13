@@ -8,8 +8,9 @@ import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 import PeoplePage from '../PeoplePage/PeoplePage.js';
 import SwapiService from '../../services/SwapiService .js'
 import ItemList from '../ItemList/ItemList.js';
-import ItemDetails from '../ItemDetails/ItemDetails.js';
+import ItemDetails, { Record} from '../ItemDetails/ItemDetails.js';
 import Row from '../Row/Row.js';
+
 
 
 import './App.css';
@@ -42,7 +43,11 @@ class App extends Component {
       <ItemDetails
         itemId={11}
         getData={getPerson}
-        getImageUrl={getPersonImage} >
+        getImageUrl={getPersonImage}>
+
+        <Record field = "gender"  label="Gender" />
+        <Record field = "eyeColor"  label="Eye Color" />
+
       </ItemDetails>
     );
 
