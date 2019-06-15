@@ -6,10 +6,12 @@ import ErrorButton from '../ErrorButton/ErrorButton.js';
 import './ItemDetails.css';
 
 const Record = ({item, field, label}) => {
-  return (<li className="list-group-item">
-       <span className="term">{label}</span>
-       <span>{item[field]}</span>
-    </li>)
+  return (
+      <li className="list-group-item">
+         <span className="term">{label}</span>
+         <span>{item[field]}</span>
+      </li>
+    )
 };
 
 export {
@@ -17,7 +19,7 @@ export {
  }
 
 export default class ItemDetails extends Component {
-  swapiService = new SwapiService()
+ 
   state = { 
     item: null,
     image: null
@@ -66,8 +68,8 @@ export default class ItemDetails extends Component {
           <h4>{name}</h4>
           <ul className="list-group list-group-flush">
             {
-              React.Children.map(this.props.children, (child) => {
-                return React.cloneElement(child, { item });
+              React.Children.map(this.props.children, (child) => { // получаем доступ к объекту, React.Children.map - позволяет нам не надо задумоваться какого типа child нам попался
+                return React.cloneElement(child, { item }); // Принимает несколько аргументов, первый это тот, который нужно скопировать
               })
             }
           </ul>

@@ -5,9 +5,16 @@ import RandomPlanet from '../RandomPlanet/RandomPlanet.js';
 import ErrorButton from '../ErrorButton/ErrorButton.js';
 import ErrorIndicator from '../ErrorIndicator/ErrorIndicator.js';
 import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
-import PeoplePage from '../PeoplePage/PeoplePage.js';
+
 import SwapiService from '../../services/SwapiService .js'
-import ItemList from '../ItemList/ItemList.js';
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList
+} from '../sw-components/IndexList.js';
 import ItemDetails, { Record} from '../ItemDetails/ItemDetails.js';
 import Row from '../Row/Row.js';
 
@@ -34,7 +41,9 @@ class App extends Component {
 
   render() {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
-    const { getPerson,
+    const { getAllPeople,
+    		getAllPlanets,
+    		getPerson,
             getStarship,
             getPersonImage,
             getStarshipImage } = this.swapiService;
@@ -78,7 +87,17 @@ class App extends Component {
             </button>
             <ErrorButton />
           </div>
+		  <PersonList getData={getAllPeople}> 
+			{ ({name}) => <span>{name}</span>}
+		  </PersonList>
 
+		  <PlanetList getData={getAllPeople}> 
+			{ ({name}) => <span>{name}</span>}
+		  </PlanetList>
+
+		  <StarshipList getData={getAllPeople}> 
+			{ ({name}) => <span>{name}</span>}
+		  </StarshipList>
           <Row
             left={personDetails} 
             right = {starshipDetails} />
