@@ -41,38 +41,7 @@ class App extends Component {
 
   render() {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
-    const { getAllPeople,
-    		getAllPlanets,
-    		getPerson,
-            getStarship,
-            getPersonImage,
-            getStarshipImage } = this.swapiService;
-
-    const personDetails = (
-      <ItemDetails
-        itemId={11}
-        getData={getPerson}
-        getImageUrl={getPersonImage}>
-
-        <Record field = "gender"  label="Gender" />
-        <Record field = "eyeColor"  label="Eye Color" />
-
-      </ItemDetails>
-    );
-
-    const starshipDetails = (
-      <ItemDetails
-        itemId={5}
-        getData={getStarship}
-        getImageUrl={getStarshipImage}>
-
-        <Record field = "model"  label="Model" />
-        <Record field = "length"  label="Length" />
-        <Record field = "costInCredits"  label="Cost" />
-
-      </ItemDetails>
-
-    );
+   
     return (
       <ErrorBoundry>
         <div className="stardb-app">
@@ -87,20 +56,21 @@ class App extends Component {
             </button>
             <ErrorButton />
           </div>
-		  <PersonList getData={getAllPeople}> 
+		  <PersonList> 
 			{ ({name}) => <span>{name}</span>}
 		  </PersonList>
+		  <PersonDetails itemId={11}/>
 
-		  <PlanetList getData={getAllPeople}> 
+		  <PlanetList> 
 			{ ({name}) => <span>{name}</span>}
 		  </PlanetList>
 
-		  <StarshipList getData={getAllPeople}> 
+		  <StarshipList> 
 			{ ({name}) => <span>{name}</span>}
 		  </StarshipList>
           <Row
-            left={personDetails} 
-            right = {starshipDetails} />
+            left={PersonDetails} 
+            right = {StarshipDetails} />
 
         </div>
       </ErrorBoundry>

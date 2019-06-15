@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import SwapiService from '../../services/SwapiService .js';
-import Spinner from '../Spinner/Spinner.js';
+
 import ErrorButton from '../ErrorButton/ErrorButton.js';
 
 import './ItemDetails.css';
@@ -56,8 +55,7 @@ export default class ItemDetails extends Component {
     if(!this.state.item) {
       return <span> Select a item a list </span>
     }
-    const { id, name, gender, birthYear, eyeColor
-      } = item
+    const { name} = item
     return (
       <div className="item-details card">
         <img className="item-image"
@@ -69,7 +67,7 @@ export default class ItemDetails extends Component {
           <ul className="list-group list-group-flush">
             {
               React.Children.map(this.props.children, (child) => { // получаем доступ к объекту, React.Children.map - позволяет нам не надо задумоваться какого типа child нам попался
-                return React.cloneElement(child, { item }); // Принимает несколько аргументов, первый это тот, который нужно скопировать
+                return React.cloneElement(child, { item }); // Принимает несколько аргументов, первый это тот, который нужно скопировать, второй добавляет свойтство в дополнение к тем который там уже определенны field & label в
               })
             }
           </ul>
