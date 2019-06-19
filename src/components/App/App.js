@@ -6,7 +6,9 @@ import ErrorButton from '../ErrorButton/ErrorButton.js';
 import ErrorIndicator from '../ErrorIndicator/ErrorIndicator.js';
 import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 
-import SwapiService from '../../services/SwapiService .js'
+import SwapiService from '../../services/SwapiService .js';
+import DummySwapiService from '../../services/Dummy-swapi-service.js';
+import { SwapiServiceProvider } from '../swapi-service-context/swapi-service-context.js';
 import {
   PersonDetails,
   PlanetDetails,
@@ -22,9 +24,9 @@ import Row from '../Row/Row.js';
 
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
 
-  swapiService = new SwapiService();
+  swapiService = new DummySwapiService();
 
   state = {
     showRandomPlanet: true
@@ -38,44 +40,64 @@ class App extends Component {
     });
   };
 
-
   render() {
-    const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
-   
+
+    const planet = this.state.showRandomPlanet ?
+      <RandomPlanet/> :
+      null;
+
+    const { getPerson,
+            getStarship,
+            getPersonImage,
+            getStarshipImage,
+            getAllPeople,
+            getAllPlanets } = this.swapiService;
+
+    const personDetails = (
+      <ItemDetails
+        itemId={11}
+        getData={getPerson}
+        getImageUrl={getPersonImage} >
+
+        <Record field="gender" label="Gender" />
+        <Record field="eyeColor" label="Eye Color" />
+
+      </ItemDetails>
+    );
+
+    const starshipDetails = (
+      <ItemDetails
+        itemId={5}
+        getData={getStarship}
+        getImageUrl={getStarshipImage}>
+
+        <Record field="model" label="Model" />
+        <Record field="length" label="Length" />
+        <Record field="costInCredits" label="Cost" />
+      </ItemDetails>
+    );
+
     return (
       <ErrorBoundry>
-        <div className="stardb-app">
-          <Header />
-          { planet }
+        <SwapiServiceProvider value={this.swapiService} >
+          <div className="stardb-app">
+            <Header />
 
-          <div className="row mb2 button-row">
-            <button
-              className="toggle-planet btn btn-warning btn-lg"
-              onClick={this.toggleRandomPlanet}>
-              Toggle Random Planet
-            </button>
-            <ErrorButton />
+            <PersonDetails itemId={11} />
+
+            <PlanetDetails itemId={5} />
+
+            <StarshipDetails itemId={9} />
+
+            <PersonList />
+
+            <StarshipList />
+
+            <PlanetList />
+
           </div>
-		  <PersonList> 
-			{ ({name}) => <span>{name}</span>}
-		  </PersonList>
-		  <PersonDetails itemId={11}/>
-
-		  <PlanetList> 
-			{ ({name}) => <span>{name}</span>}
-		  </PlanetList>
-
-		  <StarshipList> 
-			{ ({name}) => <span>{name}</span>}
-		  </StarshipList>
-          <Row
-            left={PersonDetails} 
-            right = {StarshipDetails} />
-
-        </div>
+        </SwapiServiceProvider>
       </ErrorBoundry>
     );
-  } 
-};
-
-export default App;
+  }
+}
