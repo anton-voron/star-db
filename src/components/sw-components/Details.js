@@ -15,12 +15,33 @@ const {
   getStarshipImage
 } = swapiService;
 
+const withChildFunction = (Wrapperd, fn) => {
+  return (props) => {
+    return(
+      <Wrapperd {...props}>
+        {fn}
+      </Wrapperd>
+    )
+  }
+};
 
-const PersonDetails = HOCDetails(ItemDetails, 11, getPerson, getPersonImage);
+const personRender = [<Record field = "gender"  label="Gender" />, 
+                      <Record field = "eyeColor"  label="Eye Color" />
+                      ];
 
-const PlanetDetails = HOCDetails(ItemDetails, 11, getPlanet, getPlanetImage);
+const planetRender = [<Record field = "population"  label="Population" />, 
+                      <Record field = "rotationPeriod"  label="Rotation Period" />
+                      ];
 
-const StarshipDetails = HOCDetails(ItemDetails, 11, getStarship, getStarshipImage);
+const starshipRender = [<Record field = "model"  label="Model" />,
+                        <Record field = "length"  label="Length" />,
+                        <Record field = "cargoCapacity"  label="Capacity" />
+                      ];
+const PersonDetails = HOCDetails(withChildFunction(ItemDetails, personRender), 11, getPerson, getPersonImage);
+
+const PlanetDetails = HOCDetails(withChildFunction(ItemDetails, personRender), 11, getPlanet, getPlanetImage);
+
+const StarshipDetails = HOCDetails(withChildFunction(ItemDetails, starshipRender), 11, getStarship, getStarshipImage);
 
 
 

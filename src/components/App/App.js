@@ -38,20 +38,6 @@ class App extends Component {
 
   render() {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
-  
-    const personDetails = 
-      <PersonDetails>
-        <Record field = "gender"  label="Gender" />
-        <Record field = "eyeColor"  label="Eye Color" />
-      </PersonDetails>;
-
-  
-    const starshipDetails = 
-      <StarshipDetails>
-        <Record field = "model"  label="Model" />
-        <Record field = "length"  label="Length" />
-        <Record field = "cargoCapacity"  label="Capacity" />
-      </StarshipDetails>;
 
     return (
       <ErrorBoundry>
@@ -70,10 +56,10 @@ class App extends Component {
 
 		  <Row
         left = { <PersonList /> }
-        right = { personDetails } />
+        right = { <PersonDetails /> } />
       <Row
          left = { <StarshipList /> } 
-         right = { starshipDetails } />
+         right = { <StarshipDetails /> } />
         </div>
       </ErrorBoundry>
     );
