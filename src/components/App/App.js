@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import Header from '../Header/Header.js';
 import RandomPlanet from '../RandomPlanet/RandomPlanet.js';
 import ErrorButton from '../ErrorButton/ErrorButton.js';
-import ErrorIndicator from '../ErrorIndicator/ErrorIndicator.js';
 import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 
 import {
@@ -14,7 +13,8 @@ import {
   PlanetList,
   StarshipList
 } from '../sw-components/IndexList.js';
-import ItemDetails, { Record} from '../ItemDetails/ItemDetails.js';
+
+import { Record } from '../ItemDetails/ItemDetails.js';
 import Row from '../Row/Row.js';
 
 
