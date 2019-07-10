@@ -48,6 +48,17 @@ class App extends Component {
         <Record field = "eyeColor"  label="Eye Color" />
       </PersonDetails>;
 
+    const  starshipList = 
+      <StarshipList> 
+        { ({name}) => <span>{name}</span>}
+      </StarshipList>;
+    const starshipDetails = 
+      <StarshipDetails>
+        <Record field = "model"  label="Model" />
+        <Record field = "length"  label="Length" />
+        <Record field = "cargoCapacity"  label="Capacity" />
+      </StarshipDetails>;
+
     return (
       <ErrorBoundry>
         <div className="stardb-app">
@@ -66,18 +77,9 @@ class App extends Component {
 		  <Row
         left = { personList }
         right = { personDetails } />
-
-		  <PlanetList> 
-			{ ({name}) => <span>{name}</span>}
-		  </PlanetList>
-
-		  <StarshipList> 
-			{ ({name}) => <span>{name}</span>}
-		  </StarshipList>
-          <Row
-            left={PersonDetails} 
-            right = {StarshipDetails} />
-
+      <Row
+         left = { starshipList } 
+         right = { starshipDetails } />
         </div>
       </ErrorBoundry>
     );
