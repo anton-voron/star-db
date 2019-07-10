@@ -20,7 +20,7 @@ export {
 
 const ItemDetails = (props) => {
    const {item, image, children: renderLabel} = props;
-   const { name} = item;
+   const { name } = item;
    return (
     <ErrorBoundry>
        <div className="item-details card">

@@ -15,6 +15,7 @@ const {
   getStarshipImage
 } = swapiService;
 
+
 const PersonDetails = HOCDetails(ItemDetails, 11, getPerson, getPersonImage);
 
 const PlanetDetails = HOCDetails(ItemDetails, 11, getPlanet, getPlanetImage);
