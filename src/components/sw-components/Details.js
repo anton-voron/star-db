@@ -1,75 +1,50 @@
 import React from 'react';
 
 import ItemDetails, { Record } from '../ItemDetails/ItemDetails.js';
+import HOCDetails from '../HocDetails/HOCDetails.js';
+import SwapiService from '../../services/SwapiService .js';
 
-import { SwapiServiceConsumer } from '../swapi-service-context/swapi-service-context.js';
+const swapiService = new SwapiService();
 
-const PersonDetails = ({ itemId }) => {
-  return (
-    <SwapiServiceConsumer>
-      {
-        ({ getPerson, getPersonImage }) => {
-          return (
-            <ItemDetails
-              itemId={itemId}
-              getData={getPerson}
-              getImageUrl={getPersonImage} >
+const {
+  getPerson,
+  getPlanet,
+  getStarship,
+  getPersonImage,
+  getPlanetImage,
+  getStarshipImage
+} = swapiService;
 
-              <Record field="gender" label="Gender" />
-              <Record field="eyeColor" label="Eye Color" />
-            </ItemDetails>
-          );
-        }
-      }
-    </SwapiServiceConsumer>
-  );
+const withChildFunction = (Wrapperd, fn) => {
+  return (props) => {
+    return(
+      <Wrapperd {...props}>
+        {fn}
+      </Wrapperd>
+    )
+  }
 };
 
-const PlanetDetails = ({ itemId }) => {
-  return (
+const personRender = [<Record field = "gender"  label="Gender" />, 
+                      <Record field = "eyeColor"  label="Eye Color" />
+                      ];
 
-    <SwapiServiceConsumer>
-      {
-        ({ getPlanet, getPlanetImage }) => {
-          return (
-            <ItemDetails
-              itemId={itemId}
-              getData={getPlanet}
-              getImageUrl={getPlanetImage}>
+const planetRender = [<Record field = "population"  label="Population" />, 
+                      <Record field = "rotationPeriod"  label="Rotation Period" />
+                      ];
 
-              <Record field="population" label="Population" />
-              <Record field="rotationPeriod" label="Rotation Period" />
-              <Record field="diameter" label="Diameter" />
-            </ItemDetails>
-          );
-        }
-      }
-    </SwapiServiceConsumer>
-  );
-};
+const starshipRender = [<Record field = "model"  label="Model" />,
+                        <Record field = "length"  label="Length" />,
+                        <Record field = "cargoCapacity"  label="Capacity" />
+                      ];
+const PersonDetails = HOCDetails(withChildFunction(ItemDetails, personRender), 11, getPerson, getPersonImage);
 
-const StarshipDetails = ({ itemId }) => {
-  return (
+const PlanetDetails = HOCDetails(withChildFunction(ItemDetails, personRender), 11, getPlanet, getPlanetImage);
 
-    <SwapiServiceConsumer>
-      {
-        ({ getStarship, getStarshipImage }) => {
-          return (
-            <ItemDetails
-              itemId={itemId}
-              getData={getStarship}
-              getImageUrl={getStarshipImage}>
+const StarshipDetails = HOCDetails(withChildFunction(ItemDetails, starshipRender), 11, getStarship, getStarshipImage);
 
-              <Record field="model" label="Model" />
-              <Record field="length" label="Length" />
-              <Record field="costInCredits" label="Cost" />
-            </ItemDetails>
-          );
-        }
-      }
-    </SwapiServiceConsumer>
-  );
-};
+
+
 
 export {
   PersonDetails,
