@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Spinner from '../Spinner/Spinner.js';
-import ErrorIndicator from '../ErrorIndicator/ErrorIndicator.js';
 
-const withData = (View, getData) => {
+const withData = (View) => {
   return class extends Component {
 
     state = {
@@ -10,7 +9,17 @@ const withData = (View, getData) => {
     };
 
     componentDidMount() {
-      getData()
+      this.updateData();
+    }
+
+    componentDidUpdate(prevProps) {
+      if(this.props.getData !== prevProps.getData) {
+        this.updateData();
+      }
+    }
+
+    updateData () {
+      this.props.getData()
         .then((data) => {
           this.setState({
             data

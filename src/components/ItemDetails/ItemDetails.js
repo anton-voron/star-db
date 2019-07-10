@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import ErrorButton from '../ErrorButton/ErrorButton.js';
 import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';

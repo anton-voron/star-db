@@ -1,22 +1,11 @@
 import React from 'react';
 
 import ItemDetails, { Record } from '../ItemDetails/ItemDetails.js';
-import HOCDetails from '../HocDetails/HOCDetails.js';
-import SwapiService from '../../services/SwapiService .js';
-
-const swapiService = new SwapiService();
-
-const {
-  getPerson,
-  getPlanet,
-  getStarship,
-  getPersonImage,
-  getPlanetImage,
-  getStarshipImage
-} = swapiService;
+import {withSwapiService, HOCDetails} from '../HocHelper/HocHelper.js';
 
 const withChildFunction = (Wrapperd, fn) => {
   return (props) => {
+
     return(
       <Wrapperd {...props}>
         {fn}
@@ -37,11 +26,33 @@ const starshipRender = [<Record field = "model"  label="Model" />,
                         <Record field = "length"  label="Length" />,
                         <Record field = "cargoCapacity"  label="Capacity" />
                       ];
-const PersonDetails = HOCDetails(withChildFunction(ItemDetails, personRender), 11, getPerson, getPersonImage);
 
-const PlanetDetails = HOCDetails(withChildFunction(ItemDetails, personRender), 11, getPlanet, getPlanetImage);
+const mapMethodsToPerson = (swapiService) => {
+  return {
+    getData: swapiService.getPerson,
+    getImageUrl: swapiService.getPersonImage
+  };
+}
 
-const StarshipDetails = HOCDetails(withChildFunction(ItemDetails, starshipRender), 11, getStarship, getStarshipImage);
+const mapMethodsToPlanet = (swapiService) => {
+  return {
+    getData: swapiService.getPlanet,
+    getImageUrl: swapiService.getPlanetImage
+  };
+}
+
+const mapMethodsToStarship = (swapiService) => {
+  return {
+    getData: swapiService.getStarship,
+    getImageUrl: swapiService.getStarshipImage
+  };
+}
+
+const PersonDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, personRender), 11), mapMethodsToPerson);
+
+const PlanetDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, planetRender), 11), mapMethodsToPlanet);
+
+const StarshipDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, starshipRender), 11), mapMethodsToStarship);
 
 
 

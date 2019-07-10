@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const HOCDetails = (View, itemId, getData, getImageUrl) => {
+const HOCDetails = (View, itemId) => {
   return class extends Component {
       state = { 
       item: null,
@@ -12,8 +12,10 @@ const HOCDetails = (View, itemId, getData, getImageUrl) => {
     }
 
     componentDidUpdate (prevProps) {
-      if(this.props.itemId !== prevProps.itemId) {
-        this.updatePerson();
+      if(this.props.itemId !== prevProps.itemId || 
+         this.props.getData !== prevProps.getData ||
+         this.props.getImageUrl !== prevProps.getImageUrl) {
+        this.updateItem();
       }
     }
 
@@ -22,11 +24,11 @@ const HOCDetails = (View, itemId, getData, getImageUrl) => {
         return;
       }
 
-      getData(itemId)
+      this.props.getData(itemId)
         .then((item) => {
             this.setState({ 
               item,
-              image: getImageUrl(item)
+              image: this.props.getImageUrl(item)
            });
         });
     }
