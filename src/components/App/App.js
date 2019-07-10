@@ -53,14 +53,13 @@ class App extends Component {
             </button>
             <ErrorButton />
           </div>
-
-		  <Row
-        left = { <PersonList /> }
-        right = { <PersonDetails /> } />
-      <Row
-         left = { <StarshipList /> } 
-         right = { <StarshipDetails /> } />
-        </div>
+    		  <Row
+            left = { <PersonList /> }
+            right = { <PersonDetails /> } />
+          <Row
+             left = { <StarshipList /> } 
+             right = { <StarshipDetails /> } />
+         </div>
       </ErrorBoundry>
     );
   } 
