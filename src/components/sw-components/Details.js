@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ItemDetails, { Record } from '../ItemDetails/ItemDetails.js';
+import HOCDetails from '../HocDetails/HOCDetails.js';
 import SwapiService from '../../services/SwapiService .js';
 
 const swapiService = new SwapiService();
@@ -14,50 +15,13 @@ const {
   getStarshipImage
 } = swapiService;
 
+const PersonDetails = HOCDetails(ItemDetails, 11, getPerson, getPersonImage);
 
-const PersonDetails = ({itemId}) => {
-	return (
-		<ItemDetails
-        itemId={itemId}
-        getData={getPerson}
-        getImageUrl={getPersonImage}>
+const PlanetDetails = HOCDetails(ItemDetails, 11, getPlanet, getPlanetImage);
 
-        <Record field = "gender"  label="Gender" />
-        <Record field = "eyeColor"  label="Eye Color" />
+const StarshipDetails = HOCDetails(ItemDetails, 11, getStarship, getStarshipImage);
 
-      	</ItemDetails>
-    );
-};
 
-const PlanetDetails = ({itemId}) => {
-	return (
-		<ItemDetails
-        itemId={itemId}
-        getData={getPlanet}
-        getImageUrl={getPlanetImage}>
-
-        <Record field = "population"  label="Population" />
-        <Record field = "rotationPeriod"  label="Rotation Period" />
-        <Record field = "diameter"  label="Diameter" />
-
-      	</ItemDetails>
-      );
-};
-
-const StarshipDetails = ({itemId}) => {
-	return (
-	<ItemDetails
-        itemId={itemId}
-        getData={getStarship}
-        getImageUrl={getStarshipImage}>
-
-        <Record field = "model"  label="Model" />
-        <Record field = "length"  label="Length" />
-        <Record field = "costInCredits"  label="Cost" />
-
-      	</ItemDetails>
-      );
-};
 
 
 export {

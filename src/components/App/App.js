@@ -6,7 +6,6 @@ import ErrorButton from '../ErrorButton/ErrorButton.js';
 import ErrorIndicator from '../ErrorIndicator/ErrorIndicator.js';
 import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 
-import SwapiService from '../../services/SwapiService .js'
 import {
   PersonDetails,
   PlanetDetails,
@@ -24,8 +23,6 @@ import './App.css';
 
 class App extends Component {
 
-  swapiService = new SwapiService();
-
   state = {
     showRandomPlanet: true
   };
@@ -41,7 +38,16 @@ class App extends Component {
 
   render() {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
-   
+    const  personList = 
+      <PersonList> 
+      { ({name}) => <span>{name}</span>}
+      </PersonList>;
+    const personDetails = 
+      <PersonDetails>
+        <Record field = "gender"  label="Gender" />
+        <Record field = "eyeColor"  label="Eye Color" />
+      </PersonDetails>;
+
     return (
       <ErrorBoundry>
         <div className="stardb-app">
@@ -56,10 +62,10 @@ class App extends Component {
             </button>
             <ErrorButton />
           </div>
-		  <PersonList> 
-			{ ({name}) => <span>{name}</span>}
-		  </PersonList>
-		  <PersonDetails itemId={11}/>
+
+		  <Row
+        left = { personList }
+        right = { personDetails } />
 
 		  <PlanetList> 
 			{ ({name}) => <span>{name}</span>}
