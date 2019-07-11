@@ -3,15 +3,15 @@ import ItemList from '../ItemList/ItemList.js';
 import {withData, withSwapiService} from '../HocHelper/HocHelper.js';
 
 
-const withChildFunction = (Wrapperd, fn) => {
-	return (props) => {
-		return(
-			<Wrapperd {...props}>
-				{fn}
-			</Wrapperd>
-		)
-	}
-}
+const withChildFunction = (Wrapped, fn) => {
+  return (props) => {
+    return (
+      <Wrapped {...props}>
+        {fn}
+      </Wrapped>
+    )
+  };
+};
 
 const renderName = ({name}) => <span>{name}</span>;
 const renderNameAndModel = ({name, model}) => <span>{name} ({model})</span>;

@@ -5,18 +5,11 @@ import RandomPlanet from '../RandomPlanet/RandomPlanet.js';
 import ErrorButton from '../ErrorButton/ErrorButton.js';
 import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 
-import {
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails,
-  PersonList,
-  PlanetList,
-  StarshipList
-} from '../sw-components/IndexList.js';
 
 import SwapiService from '../../services/SwapiService .js';
 import DummySwapiService from '../../services/DummySwapiService.js';
-import Row from '../Row/Row.js';
+import Row from '../Row/Row.js'
+import {PeoplePage, PlanetsPage, StarshipsPage} from '../Pages/index.js';
 
 import {SwapiServiceProvider} from '../swapi-service-context/swapi-service-context.js';
 
@@ -39,7 +32,7 @@ class App extends Component {
         swapiService: new Service()
       };
     });
-  }
+  };
 
   toggleRandomPlanet = () => {
     this.setState((state) => {
@@ -67,15 +60,9 @@ class App extends Component {
               </button>
               <ErrorButton />
             </div>
-            <Row
-              left = { <PersonList /> }
-              right = { <PersonDetails itemId = {9} /> } />
-            <Row
-               left = { <PlanetList /> } 
-               right = { <PlanetDetails itemId = {9} /> } />
-               <Row
-               left = { <StarshipList /> } 
-               right = { <StarshipDetails itemId = {9} /> } />
+            <PeoplePage />
+            <PlanetsPage />
+            <StarshipsPage />
            </div>
          </SwapiServiceProvider>
       </ErrorBoundry>
