@@ -48,11 +48,11 @@ const mapMethodsToStarship = (swapiService) => {
   };
 }
 
-const PersonDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, personRender), 11), mapMethodsToPerson);
+const PersonDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, personRender)), mapMethodsToPerson);
 
-const PlanetDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, planetRender), 11), mapMethodsToPlanet);
+const PlanetDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, planetRender)), mapMethodsToPlanet);
 
-const StarshipDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, starshipRender), 11), mapMethodsToStarship);
+const StarshipDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, starshipRender)), mapMethodsToStarship);
 
 
 

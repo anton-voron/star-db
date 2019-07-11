@@ -23,7 +23,7 @@ const mapMethodsToAllPeople = (swapiService) => {
 }
 const mapMethodsToAllPlanet = (swapiService) => {
 	return {
-		getData: swapiService.getAllPlanet
+		getData: swapiService.getAllPlanets
 	};
 }
 const mapMethodsToAllStarships = (swapiService) => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const HOCDetails = (View, itemId) => {
+const HOCDetails = (View, ...props) => {
   return class extends Component {
       state = { 
       item: null,
@@ -20,11 +20,11 @@ const HOCDetails = (View, itemId) => {
     }
 
     updateItem () {
-      if(!itemId) {
+      if(!this.props.itemId) {
         return;
       }
 
-      this.props.getData(itemId)
+      this.props.getData(this.props.itemId)
         .then((item) => {
             this.setState({ 
               item,

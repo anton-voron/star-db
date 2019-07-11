@@ -14,7 +14,6 @@ import {
   StarshipList
 } from '../sw-components/IndexList.js';
 
-import { Record } from '../ItemDetails/ItemDetails.js';
 import SwapiService from '../../services/SwapiService .js';
 import DummySwapiService from '../../services/DummySwapiService.js';
 import Row from '../Row/Row.js';
@@ -58,10 +57,8 @@ class App extends Component {
       <ErrorBoundry>
        <SwapiServiceProvider value = {this.state.swapiService}>
           <div className="stardb-app">
-            <Header 
-            onServiceChange = {this.onServiceChange}/>
+            <Header onServiceChange = {this.onServiceChange}/>
             { planet }
-
             <div className="row mb2 button-row">
               <button
                 className="toggle-planet btn btn-warning btn-lg"
@@ -72,10 +69,13 @@ class App extends Component {
             </div>
             <Row
               left = { <PersonList /> }
-              right = { <PersonDetails /> } />
+              right = { <PersonDetails itemId = {9} /> } />
             <Row
+               left = { <PlanetList /> } 
+               right = { <PlanetDetails itemId = {9} /> } />
+               <Row
                left = { <StarshipList /> } 
-               right = { <StarshipDetails /> } />
+               right = { <StarshipDetails itemId = {9} /> } />
            </div>
          </SwapiServiceProvider>
       </ErrorBoundry>
