@@ -8,7 +8,6 @@ import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 
 import SwapiService from '../../services/SwapiService .js';
 import DummySwapiService from '../../services/DummySwapiService.js';
-import Row from '../Row/Row.js'
 import {PeoplePage, PlanetsPage, StarshipsPage} from '../Pages/index.js';
 
 import {SwapiServiceProvider} from '../swapi-service-context/swapi-service-context.js';
