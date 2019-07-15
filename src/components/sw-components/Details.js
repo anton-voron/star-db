@@ -3,29 +3,33 @@ import React from 'react';
 import ItemDetails, { Record } from '../ItemDetails/ItemDetails.js';
 import {withSwapiService, HOCDetails} from '../HocHelper/HocHelper.js';
 
-const withChildFunction = (Wrapperd, fn) => {
+const withChildFunction = (fn) => (Wrapperd) => {
   return (props) => {
 
     return(
       <Wrapperd {...props}>
-        {fn}
+        {fn ()}
       </Wrapperd>
     )
   }
 };
 
-const personRender = [<Record field = "gender"  label="Gender" />, 
+const personRender = () => { return (
+                      <Record field = "gender"  label="Gender" />, 
                       <Record field = "eyeColor"  label="Eye Color" />
-                      ];
+                      )};
 
-const planetRender = [<Record field = "population"  label="Population" />, 
+const planetRender = () => { return (
+                      <Record field = "population"  label="Population" />, 
                       <Record field = "rotationPeriod"  label="Rotation Period" />
-                      ];
+                      )
+                      };
 
-const starshipRender = [<Record field = "model"  label="Model" />,
+const starshipRender = () => { return (
+                        <Record field = "model"  label="Model" />,
                         <Record field = "length"  label="Length" />,
                         <Record field = "cargoCapacity"  label="Capacity" />
-                      ];
+                      )};
 
 const mapMethodsToPerson = (swapiService) => {
   return {
@@ -48,11 +52,18 @@ const mapMethodsToStarship = (swapiService) => {
   };
 }
 
-const PersonDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, personRender)), mapMethodsToPerson);
+const PersonDetails = withSwapiService(mapMethodsToPerson)(
+                                        HOCDetails(
+                                          withChildFunction(personRender) (ItemDetails))
+  );
 
-const PlanetDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, planetRender)), mapMethodsToPlanet);
+const PlanetDetails = withSwapiService(mapMethodsToPlanet)(
+                                        HOCDetails(
+                                          withChildFunction(planetRender) (ItemDetails)));
 
-const StarshipDetails = withSwapiService(HOCDetails(withChildFunction(ItemDetails, starshipRender)), mapMethodsToStarship);
+const StarshipDetails = withSwapiService(mapMethodsToStarship)(
+                                        HOCDetails(
+                                          withChildFunction(starshipRender) (ItemDetails)));
 
 
 
