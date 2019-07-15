@@ -39,7 +39,7 @@ const HOCDetails = (View) => {
       if(!this.state.item) {
         return <span> Select a item a list </span>
       }
-      return <View {...this.props} item={item} image={image} itemId={this.props.itemId}/>;
+      return <View {...this.props} item={item} image={image}/>;
     }
   }
 }

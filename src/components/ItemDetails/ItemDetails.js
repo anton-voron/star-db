@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import ErrorButton from '../ErrorButton/ErrorButton.js';
 import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
@@ -20,10 +21,21 @@ export {
 
 const ItemDetails = (props) => {
    const {item, image, children: renderLabel} = props;
-   const { name } = item;
+   const { id, name } = item;
    return (
     <ErrorBoundry>
-       <div className="item-details card">
+       <div className="item-details card" 
+       onClick ={() => {
+        if(item.gender) {
+          props.history.push(`/people/${id}`);
+        } else if (item.rotationPeriod) {
+          props.history.push(`/planets/${id}`);
+        } else if (item.model) {
+          props.history.push(`/starships/${id}`);
+        }
+      }
+       
+       }>
          <img className="item-image"
            src={image}
            alt="item-details"/>
@@ -43,4 +55,4 @@ const ItemDetails = (props) => {
    );
 }
 
-export default ItemDetails;
+export default withRouter(ItemDetails);

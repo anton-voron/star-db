@@ -9,7 +9,7 @@ import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 import SwapiService from '../../services/SwapiService .js';
 import DummySwapiService from '../../services/DummySwapiService.js';
 import {PeoplePage, PlanetsPage, StarshipsPage} from '../Pages/index.js';
-import {StarshipDetails} from '../sw-components/IndexList.js';
+import {PersonDetails, PlanetDetails, StarshipDetails} from '../sw-components/IndexList.js';
 
 import {SwapiServiceProvider} from '../swapi-service-context/swapi-service-context.js';
 
@@ -61,9 +61,19 @@ class App extends Component {
                 <ErrorButton />
               </div>
               <Route path ="/" exact={true} render={() => <h2> Welcome to StarDB </h2>} />
-              <Route path ="/people" component = {PeoplePage} />
-              <Route path ="/planets" component = {PlanetsPage} />
+              <Route path ="/people" exact={true} component = {PeoplePage} />
+              <Route path ="/planets" exact={true} component = {PlanetsPage} />
               <Route path ="/starships" exact = {true} component = {StarshipsPage} />                            
+              <Route path ="/people/:id" 
+                     render={ ({match, location, history}) => {
+                      const { id } = match.params;
+                      return <PersonDetails itemId = {id}/>
+                   }} />
+              <Route path ="/planets/:id" 
+                     render={ ({match, location, history}) => {
+                      const { id } = match.params;
+                      return <PlanetDetails itemId = {id}/>
+                   }} />
               <Route path ="/starships/:id" 
                      render={ ({match, location, history}) => {
                       const { id } = match.params;
