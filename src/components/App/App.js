@@ -41,7 +41,6 @@ class App extends Component {
     });
   };
 
-
   render() {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 

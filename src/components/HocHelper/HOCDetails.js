@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const HOCDetails = (View, ...props) => {
+const HOCDetails = (View) => {
   return class extends Component {
       state = { 
       item: null,

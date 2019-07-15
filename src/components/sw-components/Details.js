@@ -8,24 +8,30 @@ const withChildFunction = (Wrapperd, fn) => {
 
     return(
       <Wrapperd {...props}>
-        {fn}
+        {fn()}
       </Wrapperd>
     )
   }
 };
 
-const personRender = [<Record field = "gender"  label="Gender" />, 
+const personRender = () => { return (
+                      <Record field = "gender"  label="Gender" />, 
                       <Record field = "eyeColor"  label="Eye Color" />
-                      ];
+                      ) 
+};
 
-const planetRender = [<Record field = "population"  label="Population" />, 
+const planetRender = () => { return (
+                      <Record field = "population"  label="Population" />, 
                       <Record field = "rotationPeriod"  label="Rotation Period" />
-                      ];
+                      )
+};
 
-const starshipRender = [<Record field = "model"  label="Model" />,
+const starshipRender = () => { return (
+                        <Record field = "model"  label="Model" />,
                         <Record field = "length"  label="Length" />,
                         <Record field = "cargoCapacity"  label="Capacity" />
-                      ];
+                      )
+};
 
 const mapMethodsToPerson = (swapiService) => {
   return {
