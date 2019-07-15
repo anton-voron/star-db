@@ -26,15 +26,10 @@ const ItemDetails = (props) => {
     <ErrorBoundry>
        <div className="item-details card" 
        onClick ={() => {
-        if(item.gender) {
-          props.history.push(`/people/${id}`);
-        } else if (item.rotationPeriod) {
-          props.history.push(`/planets/${id}`);
-        } else if (item.model) {
-          props.history.push(`/starships/${id}`);
-        }
-      }
-       
+        
+          props.history.push(id); // Это отнсительный пусть который не требует точного указанитя `/planets/${id}`, но чтобы это работало нужно было в header в линке указать /planets/
+     
+       }
        }>
          <img className="item-image"
            src={image}
