@@ -5,6 +5,22 @@ import {withSwapiService, HOCDetails, withChildFunction, Compose} from '../HocHe
 
 
 
+const personRender = () => { return (
+                      <Record field = "gender"  label="Gender" />, 
+                      <Record field = "eyeColor"  label="Eye Color" />
+                      )};
+
+const planetRender = () => { return (
+                      <Record field = "population"  label="Population" />, 
+                      <Record field = "rotationPeriod"  label="Rotation Period" />
+                      )
+                      };
+
+const starshipRender = () => { return (
+                        <Record field = "model"  label="Model" />,
+                        <Record field = "length"  label="Length" />,
+                        <Record field = "cargoCapacity"  label="Capacity" />
+                      )};
 
 const mapMethodsToPerson = (swapiService) => {
   return {
