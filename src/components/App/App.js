@@ -9,10 +9,11 @@ import ErrorBoundry from '../ErrorBoundry/ErrorBoundry.js';
 import SwapiService from '../../services/SwapiService .js';
 import DummySwapiService from '../../services/DummySwapiService.js';
 import {PeoplePage, PlanetsPage, StarshipsPage} from '../Pages/index.js';
+import {StarshipDetails} from '../sw-components/IndexList.js';
 
 import {SwapiServiceProvider} from '../swapi-service-context/swapi-service-context.js';
 
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
 
@@ -43,26 +44,34 @@ class App extends Component {
 
 
   render() {
-    const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
+    const planet = this.state.showRandomPlanet ? <RandomPlanet  updateInterval = { 5000 }/> : null;
 
     return (
       <ErrorBoundry>
        <SwapiServiceProvider value = {this.state.swapiService}>
-          <div className="stardb-app">
-            <Header onServiceChange = {this.onServiceChange}/>
-            { planet }
-            <div className="row mb2 button-row">
-              <button
-                className="toggle-planet btn btn-warning btn-lg"
-                onClick={this.toggleRandomPlanet}>
-                Toggle Random Planet
-              </button>
-              <ErrorButton />
-            </div>
-            <PeoplePage />
-            <PlanetsPage />
-            <StarshipsPage />
-           </div>
+          <Router>
+            <div className="stardb-app">
+              <Header onServiceChange = {this.onServiceChange}/>
+              { planet }
+              <div className="row mb2 button-row">
+                <button
+                  className="toggle-planet btn btn-warning btn-lg"
+                  onClick={this.toggleRandomPlanet}>
+                  Toggle Random Planet
+                </button>
+                <ErrorButton />
+              </div>
+              <Route path ="/" exact={true} render={() => <h2> Welcome to StarDB </h2>} />
+              <Route path ="/people" component = {PeoplePage} />
+              <Route path ="/planets" component = {PlanetsPage} />
+              <Route path ="/starships" exact = {true} component = {StarshipsPage} />                            
+              <Route path ="/starships/:id" 
+                     render={ ({match, location, history}) => {
+                      const { id } = match.params;
+                      return <StarshipDetails itemId = {id}/>
+                   }} />
+             </div>
+           </Router>
          </SwapiServiceProvider>
       </ErrorBoundry>
     );

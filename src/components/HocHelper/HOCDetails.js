@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const HOCDetails = (View, ...props) => {
+const HOCDetails = (View) => {
   return class extends Component {
       state = { 
       item: null,
@@ -39,7 +39,7 @@ const HOCDetails = (View, ...props) => {
       if(!this.state.item) {
         return <span> Select a item a list </span>
       }
-      return <View {...this.props} item={item} image={image}/>;
+      return <View {...this.props} item={item} image={image} itemId={this.props.itemId}/>;
     }
   }
 }

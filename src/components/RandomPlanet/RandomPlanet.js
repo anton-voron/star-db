@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import SwapiService from '../../services/SwapiService .js';
 import Spinner from '../Spinner/Spinner.js';
 import ErrorIndicator from '../ErrorIndicator/ErrorIndicator.js';
@@ -7,6 +9,14 @@ import './RandomPlanet.css';
 
 export default class RandomPlanet extends Component {
   swapiService = new SwapiService();
+
+  static defaultProps = {
+    updateInterval: 5000
+  };
+
+  static propTypes = {
+    updateInterval: PropTypes.number
+  };
 
   state = {
     planet: {},
@@ -21,9 +31,11 @@ export default class RandomPlanet extends Component {
 }*/
 
 componentDidMount () {
+  const {updateInterval} = this.props
   this.updatePlanet();
-  this.interval = setInterval(this.updatePlanet, 5000); // создаём таймер id, по которому очистим ссылку на метод, когда он станет ненужным, ибо без этого он не удалитьься и будет постоянно делать запрос на сервер
+  this.interval = setInterval(this.updatePlanet, updateInterval); // создаём таймер id, по которому очистим ссылку на метод, когда он станет ненужным, ибо без этого он не удалитьься и будет постоянно делать запрос на сервер
 }
+
 
 componentWillUnmount() {
   clearInterval(this.interval); //Нужно удалить данные, с которыми работал RandomPlanet , когда он закрывается, ибо эти элементы не удаляться и на фоне будет происходить запрос к серверу  дальше
@@ -68,6 +80,7 @@ onPlanetLoaded = (planet) => {
     );
   }
 }
+
 
 
 // Для того, чтобы не создавать лишние реакт компоненты, мы использует фрагмент реакта - это элемент обёртка для того, чтобы сгруппировать другие элементы
