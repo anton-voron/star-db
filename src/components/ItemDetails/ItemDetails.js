@@ -26,7 +26,7 @@ const ItemDetails = (props) => {
     <ErrorBoundry>
        <div className="item-details card" 
        onClick ={() => {
-        
+          if(item.gender) {props.history.push(`/people/${id}`) } // пример неопционального  роутинга
           props.history.push(id); // Это отнсительный пусть который не требует точного указанитя `/planets/${id}`, но чтобы это работало нужно было в header в линке указать /planets/
      
        }

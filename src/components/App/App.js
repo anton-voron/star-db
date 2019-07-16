@@ -73,8 +73,10 @@ class App extends Component {
                 </button>
                 <ErrorButton />
               </div>
-              <Route path ="/" exact={true} render={() => <h2> Welcome to StarDB </h2>} />
-              <Route path ="/people" exact = {true} component = {PeoplePage} />
+              <Route path ="/" exact={true} render={() => <h2> Welcome to StarDB </h2>} /> 
+              <Route path ="/peoples/:id?"  exact = {true} component = {PeoplePage} 
+              // people:id? - ? запоминает текущий url с id
+              /> 
               <Route path ="/planets" exact = {true} component = {PlanetsPage} />
               <Route path ="/starships" exact = {true} component = {StarshipsPage} />                            
               <Route path ="/people/:id" 

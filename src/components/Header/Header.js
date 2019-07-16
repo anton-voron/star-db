@@ -12,7 +12,7 @@ const Header = ({onServiceChange}) => {
         </Link>
       <ul className="d-flex">
         <li>
-          <Link to="/people/">People</Link>
+          <Link to="/peoples/">People</Link>
         </li>
         <li>
           <Link to="/planets/">Planets</Link>
